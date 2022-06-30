@@ -1,4 +1,5 @@
 const http = require('http');
+const { brotliDecompressSync } = require('zlib');
 
 const todos = [
   {
@@ -24,8 +25,16 @@ const server = http.createServer((req, res) => {
     'X-Powered-By': 'Node.js'
   });
 
-  console.log(req.headers.authorization);
+  let body = [];
 
+  req
+    .on('data', (chunk) => {
+      body.push(chunk);
+    })
+    .on('end', () => {
+      body = Buffer.concat(body).toString();
+      console.log(body);
+    });
   res.end(
     JSON.stringify({
       success: true,
