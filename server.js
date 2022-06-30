@@ -19,15 +19,18 @@ const server = http.createServer((req, res) => {
   console.log(req);
   const { header, url, method } = req;
 
-  res.writeHead(404, {
+  res.writeHead(200, {
     'Content-Type': 'application/json',
     'X-Powered-By': 'Node.js'
   });
 
+  console.log(req.headers.authorization);
+
   res.end(
     JSON.stringify({
-      error: 'Not found',
-      data: null
+      success: true,
+      //error: 'Not found',
+      data: todos
     })
   );
 });
