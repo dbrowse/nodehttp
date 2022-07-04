@@ -17,14 +17,7 @@ const todos = [
 ];
 
 const server = http.createServer((req, res) => {
-  console.log(req);
-  const { header, url, method } = req;
-
-  res.writeHead(200, {
-    'Content-Type': 'application/json',
-    'X-Powered-By': 'Node.js'
-  });
-
+  const { method, url } = req;
   let body = [];
 
   req
@@ -33,15 +26,25 @@ const server = http.createServer((req, res) => {
     })
     .on('end', () => {
       body = Buffer.concat(body).toString();
-      console.log(body);
+
+      let status = 404;
+
+      const response = {
+        success: false,
+        data: null
+      };
+
+      if (method === 'GET' && url === '/todos') {
+        status = 200;
+        response.success = true;
+        response.data = todos;
+      }
+      res.writeHead(status, {
+        'Content-Type': 'application/json',
+        'X-Powered-By': 'Node.js'
+      });
+      res.end(JSON.stringify(response));
     });
-  res.end(
-    JSON.stringify({
-      success: true,
-      //error: 'Not found',
-      data: todos
-    })
-  );
 });
 
 const PORT = 5000;
