@@ -1,23 +1,17 @@
 {
-  "name": "nodehttp",
+  "name": "wiki-api",
   "version": "1.0.0",
-  "description": "Learning http",
-  "main": "server.js",
+  "description": "Create API",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dbrowse/nodehttp.git"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Diyan Georgiev",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/dbrowse/nodehttp/issues"
-  },
-  "homepage": "https://github.com/dbrowse/nodehttp#readme",
-  "devDependencies": {
-    "nodemon": "^2.0.18"
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "mongoose": "^6.5.2"
   }
 }
